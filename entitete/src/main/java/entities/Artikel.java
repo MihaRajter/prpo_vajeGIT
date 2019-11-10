@@ -1,11 +1,13 @@
+package entities;
+
 import javax.persistence.*;
 
 @Entity(name = "artikel")
 @NamedQueries(value =
         {
-                @NamedQuery(name = "Artikel.getAll", query = "SELECT o FROM artikel o"),
-                @NamedQuery(name = "Artikel.getoneId", query = "SELECT o FROM artikel o WHERE o.Artikel_id = :Artikel_id"),
-                @NamedQuery(name = "Artikel.getoneIme", query = "SELECT o FROM artikel o WHERE o.ime = :ime")
+                @NamedQuery(name = "entities.Artikel.getAll", query = "SELECT o FROM artikel o"),
+                @NamedQuery(name = "entities.Artikel.getoneId", query = "SELECT o FROM artikel o WHERE o.Artikel_id = :Artikel_id"),
+                @NamedQuery(name = "entities.Artikel.getoneIme", query = "SELECT o FROM artikel o WHERE o.ime = :ime")
         })
 public class Artikel {
 

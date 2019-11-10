@@ -1,9 +1,11 @@
+package entities;
+
 import javax.persistence.*;
 
 @Entity(name = "seznamartikel")
 @NamedQueries(value =
         {
-                @NamedQuery(name = "Seznamartikel.getAll", query = "SELECT o FROM seznamartikel o")
+                @NamedQuery(name = "entities.Seznamartikel.getAll", query = "SELECT o FROM seznamartikel o")
         })
 public class Seznamartikel {
 
