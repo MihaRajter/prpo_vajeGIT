@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Seznamartikel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) git
     private Integer id_sza;
 
     @Column(name = "read")
