@@ -8,16 +8,18 @@ import javax.persistence.*;
 public class Uporabnik {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer Uporabnik_id;
 
+    @Column(name = "ime")
     private String ime;
 
+    @Column(name = "priimek")
     private String priimek;
 
     //getter setter ---------------------------
 
     public Integer getId() {
-        return id;
+        return Uporabnik_id;
     }
 
     public String getIme() {
@@ -29,7 +31,7 @@ public class Uporabnik {
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.Uporabnik_id = id;
     }
 
     public void setIme(String ime) {

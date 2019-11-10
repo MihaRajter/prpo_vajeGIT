@@ -11,13 +11,16 @@ public class Uporabnikseznam {
 
     @Id
     @GeneratedValue( strategy= GenerationType.AUTO )
+    private Integer id_ups;
+
     @ManyToOne
-    private Uporabnik uporabnik_id;
+    @JoinColumn(name = "Uporabnik_id")
+    private Uporabnik uporabnik;
     @ManyToOne
-    private Seznam seznam_id;
+    @JoinColumn(name = "id_seznama")
+    private Seznam seznam;
 
     //getter setter -.-----------
-
 
     public boolean isOdkljukan() {
         return odkljukan;
@@ -27,19 +30,27 @@ public class Uporabnikseznam {
         this.odkljukan = odkljukan;
     }
 
-    public Uporabnik getUporabnik_id() {
-        return uporabnik_id;
+    public Integer getId_ups() {
+        return id_ups;
     }
 
-    public void setUporabnik_id(Uporabnik uporabnik_id) {
-        this.uporabnik_id = uporabnik_id;
+    public void setId_ups(Integer id_ups) {
+        this.id_ups = id_ups;
     }
 
-    public Seznam getSeznam_id() {
-        return seznam_id;
+    public Uporabnik getUporabnik() {
+        return uporabnik;
     }
 
-    public void setSeznam_id(Seznam seznam_id) {
-        this.seznam_id = seznam_id;
+    public void setUporabnik(Uporabnik uporabnik) {
+        this.uporabnik = uporabnik;
+    }
+
+    public Seznam getSeznam() {
+        return seznam;
+    }
+
+    public void setSeznam(Seznam seznam) {
+        this.seznam = seznam;
     }
 }

@@ -3,11 +3,11 @@
     <persistence-unit name="lokacijski-opomniki-jpa" transaction-type="JTA">
         <jta-data-source>jdbc/LokacijskiOpomnikiDS</jta-data-source>
 
-        <class>Artikel</class>
-        <class>Seznam</class>
-        <class>Seznamartikel</class>
-        <class>Uporabnik</class>
-        <class>Uporabnikseznam</class>
+        <class>si.fri.prpo3.prpo-vaje-tretje.entitete.Artikel</class>
+        <class>si.fri.prpo3.prpo-vaje-tretje.entitete.Seznam</class>
+        <class>si.fri.prpo3.prpo-vaje-tretje.entitete.Seznamartikel</class>
+        <class>si.fri.prpo3.prpo-vaje-tretje.entitete.Uporabnik</class>
+        <class>si.fri.prpo3.prpo-vaje-tretje.entitete.Uporabnikseznam</class>
 
         <properties>
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>

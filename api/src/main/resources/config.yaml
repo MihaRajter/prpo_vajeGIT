@@ -2,7 +2,7 @@ kumuluzee:
   ...
   datasources:
       - jndi-name: jdbc/NakupovalniSeznamiDS
-        connection-url: jdbc:postgresql://localhost:5432/nakupovalniseznami
+        connection-url: jdbc:postgresql://192.168.44.130/nakupovalniseznami
         username: postgres
         password: postgres
         max-pool-size: 20

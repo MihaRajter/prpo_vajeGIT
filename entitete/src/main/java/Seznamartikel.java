@@ -9,17 +9,31 @@ public class Seznamartikel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id_sza;
 
+    @Column(name = "read")
     private boolean read;
+
+    @Column(name = "write")
     private boolean write;
 
     @ManyToOne
-    private Artikel artikel_id;
+    @JoinColumn(name = "artikel_id")
+    private Artikel artikel;
     @ManyToOne
-    private Seznam seznam_id;
+    @JoinColumn(name = "id_seznama")
+    private Seznam seznam;
 
     // getter in setter metode -------------------
 
+
+    public Integer getId_sza() {
+        return id_sza;
+    }
+
+    public void setId_sza(Integer id_sza) {
+        this.id_sza = id_sza;
+    }
 
     public boolean isRead() {
         return read;
@@ -37,19 +51,19 @@ public class Seznamartikel {
         this.write = write;
     }
 
-    public Artikel getArtikel_id() {
-        return artikel_id;
+    public Artikel getArtikel() {
+        return artikel;
     }
 
-    public void setArtikel_id(Artikel artikel_id) {
-        this.artikel_id = artikel_id;
+    public void setArtikel(Artikel artikel) {
+        this.artikel = artikel;
     }
 
-    public Seznam getSeznam_id() {
-        return seznam_id;
+    public Seznam getSeznam() {
+        return seznam;
     }
 
-    public void setSeznam_id(Seznam seznam_id) {
-        this.seznam_id = seznam_id;
+    public void setSeznam(Seznam seznam) {
+        this.seznam = seznam;
     }
 }
