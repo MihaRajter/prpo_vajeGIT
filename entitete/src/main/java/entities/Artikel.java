@@ -6,14 +6,14 @@ import javax.persistence.*;
 @NamedQueries(value =
         {
                 @NamedQuery(name = "entities.Artikel.getAll", query = "SELECT o FROM artikel o"),
-                @NamedQuery(name = "entities.Artikel.getoneId", query = "SELECT o FROM artikel o WHERE o.Artikel_id = :Artikel_id"),
-                @NamedQuery(name = "entities.Artikel.getoneIme", query = "SELECT o FROM artikel o WHERE o.ime = :ime")
+                //@NamedQuery(name = "entities.Artikel.getoneId", query = "SELECT o FROM artikel o WHERE o.Artikel_id = :Artikel_id"),
+                //@NamedQuery(name = "entities.Artikel.getoneIme", query = "SELECT o FROM artikel o WHERE o.ime = :ime")
         })
 public class Artikel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Artikel_id;
+    private Integer artikel_id;
 
     @Column(name = "ime")
     private String ime;
@@ -24,11 +24,11 @@ public class Artikel {
     //---------------------------------  getter in setter metode
 
     public Integer getArtikel_id() {
-        return Artikel_id;
+        return artikel_id;
     }
 
     public void setArtikel_id(Integer artikel_id) {
-        Artikel_id = artikel_id;
+        artikel_id = artikel_id;
     }
 
     public String getIme() {
