@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Iterator;
 import java.util.List;
 
 @WebServlet("/servlet")
@@ -34,7 +32,7 @@ public class JPAServlet extends HttpServlet {
         resp.getWriter().println("Uporabniki: ");
         List<Uporabnik> list = uporabnikiZrno.getUporabniki();
         for(Uporabnik u: list){
-            resp.getWriter().println(u.getId() + u.getIme() + u.getPriimek());
+            resp.getWriter().println(u.getId() +", "+u.getIme() +" "+ u.getPriimek() + "<br>");
         }
         // izpis uporabnikov na spletno stran
 

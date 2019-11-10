@@ -6,7 +6,8 @@ import javax.persistence.*;
 @NamedQueries(value =
         {
                 @NamedQuery(name = "entities.Seznam.getAll", query = "SELECT o FROM seznam o"),
-                //@NamedQuery(name = "entities.Seznam.getAll", query = "SELECT s FROM seznam s, seznamartikel sa, artikel a WHERE s.id_seznama=sa.seznam_id AND sa.artikel_id=:artikel_id"),
+                //@NamedQuery(name = "entities.Seznam.getAll", query = "SELECT s FROM seznam s, seznamartikel sa, artikel a WHERE s.id_seznama=sa.id_seznama AND sa.artikel_id=:artikel_id"),
+                @NamedQuery(name = "entities.Seznam.getoneId", query = "SELECT o FROM seznam o WHERE o.id_seznama = :id_seznama"),
         })
 public class Seznam {
 
