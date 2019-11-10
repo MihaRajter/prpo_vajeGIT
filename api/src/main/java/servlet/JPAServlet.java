@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 
 @WebServlet("/servlet")
 public class JPAServlet extends HttpServlet {
@@ -18,8 +20,9 @@ public class JPAServlet extends HttpServlet {
         resp.setContentType("text/html; charset=UTF-8");
         resp.setCharacterEncoding("UTF-8");
 
+        PrintWriter writer = resp.getWriter();
         writer.append("<br>Uporabniki:<br>");
-        uporabnikiZrno.getUporabniki().stream().forEach(u -> writer.append(u.toString() + "<br> <br>"))
+        uporabnikiZrno.getUporabniki().stream().forEach(u -> writer.append(u.toString() + "<br> <br>"));
 
         // izpis uporabnikov na spletno stran
 
