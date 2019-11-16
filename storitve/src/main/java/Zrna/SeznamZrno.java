@@ -4,21 +4,19 @@ import entities.Seznam;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.logging.Logger;
 
+@ApplicationScoped
 public class SeznamZrno {
 
 
     private Logger log = Logger.getLogger(SeznamZrno.class.getName());
 
-    private int id_seznama;
+    private Integer id_seznama;
 
     public int getId_seznama() {
         return id_seznama;
@@ -39,19 +37,7 @@ public class SeznamZrno {
         log.info("Deinicializacija Zrna "+SeznamZrno.class.getSimpleName());
     }
 
-    public SeznamZrno(int id){
-        this.id_seznama = id;
 
-    }
-/*
-    public List<Seznam> pridobiSeznamCriteriaAPI(){
-        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-        CriteriaQuery<Seznam> query = criteriaBuilder.createQuery(Seznam.class);
-        Root<Seznam> from = query.from(Seznam.class);
-        query.select(from);
-        return em.createNamedQuery(query).getResultList();
-    }
-*/
     @PersistenceContext(unitName = "nakupovalni-seznami-jpa")
     private EntityManager em;
 
@@ -62,12 +48,6 @@ public class SeznamZrno {
 
     }
 
-    public Seznam pridobiSeznam(int id_seznama){
-        Seznam seznam = em.find(Seznam.class, id_seznama);
-        return seznam;
-    }
-
-    @Transactional
     public Seznam dodajSeznam(Seznam seznam){
         if(seznam != null){
             em.persist(seznam);
@@ -75,7 +55,6 @@ public class SeznamZrno {
         return seznam;
     }
 
-    @Transactional
     public void posodobiSeznam(int id_seznama, Seznam seznam){
         Seznam u = em.find(Seznam.class, id_seznama);
         seznam.setId_seznama(u.getId_seznama());
@@ -83,7 +62,11 @@ public class SeznamZrno {
 
     }
 
-    @Transactional
+    public Seznam pridobiSeznam(int seznamID){
+        Seznam seznam = em.find(Seznam.class, seznamID);
+        return seznam;
+    }
+
     public Integer odstraniSeznam(int id_seznama){
         Seznam seznam = pridobiSeznam(id_seznama);
         if(seznam != null){

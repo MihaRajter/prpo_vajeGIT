@@ -1,7 +1,10 @@
 package servlet;
 
+import Zrna.ArtikelZrno;
+import Zrna.SeznamZrno;
 import Zrna.UporabnikiZrno;
 import entities.Uporabnik;
+
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -16,7 +19,12 @@ import java.util.List;
 public class JPAServlet extends HttpServlet {
 
     @Inject
+    private ArtikelZrno artikelZrno;
+    @Inject
+    private SeznamZrno seznamZrno;
+    @Inject
     private UporabnikiZrno uporabnikiZrno;
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

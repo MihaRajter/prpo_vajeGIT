@@ -1,6 +1,5 @@
 package Zrna;
 
-import entities.*;
 import entities.Uporabnik;
 
 import javax.annotation.PostConstruct;
@@ -8,20 +7,15 @@ import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import javax.transaction.Transactional;
-import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Logger;
 
 @ApplicationScoped
-public class UporabnikiZrno implements Serializable {
+public class UporabnikiZrno{
 
     private Logger log = Logger.getLogger(UporabnikiZrno.class.getName());
 
-    private int idZrna;
+    private Integer idZrna;
     private String ime;
     private String priimek;
 
@@ -52,20 +46,7 @@ public class UporabnikiZrno implements Serializable {
         log.info("Deinicializacija Zrna "+UporabnikiZrno.class.getSimpleName());
     }
 
-    public UporabnikiZrno(int id, String ime, String priimek ){
-        this.idZrna = id;
-        this.ime = ime;
-        this.priimek = priimek;
-    }
-/*
-    public List<Uporabnik> pridobiUporabnikeCriteriaAPI(){
-        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-        CriteriaQuery<Uporabnik> query = criteriaBuilder.createQuery(Uporabnik.class);
-        Root<Uporabnik> from = query.from(Uporabnik.class);
-        query.select(from);
-        return em.createNamedQuery(query).getResultList();
-    }
-*/
+
 @PersistenceContext(unitName = "nakupovalni-seznami-jpa")
     private EntityManager em;
 
@@ -81,7 +62,6 @@ public class UporabnikiZrno implements Serializable {
         return uporabnik;
     }
 
-    @Transactional
     public Uporabnik dodajUporabnika(Uporabnik uporabnik){
         if(uporabnik != null){
              em.persist(uporabnik);
@@ -89,7 +69,6 @@ public class UporabnikiZrno implements Serializable {
         return uporabnik;
     }
 
-    @Transactional
     public void posodobiUporabnika(int UporabnikID, Uporabnik uporabnik){
         Uporabnik u = em.find(Uporabnik.class, UporabnikID);
         uporabnik.setId(u.getId());
@@ -97,7 +76,6 @@ public class UporabnikiZrno implements Serializable {
 
     }
 
-    @Transactional
     public Integer odstraniUporabnika(int UporabnikID){
         Uporabnik uporabnik = pridobiUporabnika(UporabnikID);
         if(uporabnik != null){

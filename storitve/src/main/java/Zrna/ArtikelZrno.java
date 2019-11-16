@@ -4,6 +4,7 @@ import entities.Artikel;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -19,9 +20,9 @@ public class ArtikelZrno {
 
     private Logger log = Logger.getLogger(ArtikelZrno.class.getName());
 
-    private int idZrna;
+    private Integer idZrna;
     private String ime;
-    private int st_nakupov;
+    private Integer st_nakupov;
 
     public String getIme() {
         return ime;
@@ -50,20 +51,6 @@ public class ArtikelZrno {
         log.info("Deinicializacija Zrna "+ArtikelZrno.class.getSimpleName());
     }
 
-    public ArtikelZrno(int id, String ime, int nakupi ){
-        this.idZrna = id;
-        this.ime = ime;
-        this.st_nakupov = nakupi;
-    }
-/*
-    public List<Artikel> pridobiArtikleCriteriaAPI(){
-        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-        CriteriaQuery<Artikel> query = criteriaBuilder.createQuery(Artikel.class);
-        Root<Artikel> from = query.from(Artikel.class);
-        query.select(from);
-        return em.createNamedQuery(query).getResultList();
-    }
-*/
     @PersistenceContext(unitName = "nakupovalni-seznami-jpa")
     private EntityManager em;
 
@@ -79,7 +66,6 @@ public class ArtikelZrno {
         return artikel;
     }
 
-    @Transactional
     public Artikel dodajArtikel(Artikel artikel){
         if(artikel != null){
             em.persist(artikel);
@@ -87,7 +73,6 @@ public class ArtikelZrno {
         return artikel;
     }
 
-    @Transactional
     public void posodobiArtikel(int artikelID, Artikel artikel){
         Artikel u = em.find(Artikel.class, artikelID);
         artikel.setArtikel_id(u.getArtikel_id());
@@ -95,7 +80,6 @@ public class ArtikelZrno {
 
    }
 
-    @Transactional
     public Integer odstraniArtikel(int artikelID){
         Artikel artikel = pridobiArtikel(artikelID);
         if(artikel != null){
