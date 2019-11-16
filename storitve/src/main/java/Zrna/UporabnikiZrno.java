@@ -21,7 +21,7 @@ public class UporabnikiZrno implements Serializable {
 
     private Logger log = Logger.getLogger(UporabnikiZrno.class.getName());
 
-    private String idZrna;
+    private int idZrna;
     private String ime;
     private String priimek;
 
@@ -48,12 +48,18 @@ public class UporabnikiZrno implements Serializable {
     @PostConstruct
     private void init(){
         log.info("Inicializacija Zrna "+UporabnikiZrno.class.getSimpleName());
-}
+    }
 
 
-@PreDestroy
+    @PreDestroy
     private void destroy(){
         log.info("Deinicializacija Zrna "+UporabnikiZrno.class.getSimpleName());
+    }
+
+    public UporabnikiZrno(int id, String ime, String priimek ){
+        this.idZrna = id;
+        this.ime = ime;
+        this.priimek = priimek;
     }
 
     public List<Uporabnik> pridobiUporabnikeCriteriaAPI(){
@@ -82,7 +88,7 @@ public class UporabnikiZrno implements Serializable {
     @Transactional
     public Uporabnik dodajUporabnika(Uporabnik uporabnik){
         if(uporabnik != null){
-            em.persist(uporabnik);
+             em.persist(uporabnik);
         }
         return uporabnik;
     }
