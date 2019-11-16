@@ -20,10 +20,6 @@ public class SeznamZrno {
 
     private int id_seznama;
 
-    public SeznamZrno{
-
-    }
-
     public int getId_seznama() {
         return id_seznama;
     }
@@ -47,7 +43,7 @@ public class SeznamZrno {
         this.id_seznama = id;
 
     }
-
+/*
     public List<Seznam> pridobiSeznamCriteriaAPI(){
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<Seznam> query = criteriaBuilder.createQuery(Seznam.class);
@@ -55,7 +51,7 @@ public class SeznamZrno {
         query.select(from);
         return em.createNamedQuery(query).getResultList();
     }
-
+*/
     @PersistenceContext(unitName = "nakupovalni-seznami-jpa")
     private EntityManager em;
 
@@ -80,10 +76,11 @@ public class SeznamZrno {
     }
 
     @Transactional
-    public Seznam posodobiSeznam(int id_seznama, Seznam seznam){
+    public void posodobiSeznam(int id_seznama, Seznam seznam){
         Seznam u = em.find(Seznam.class, id_seznama);
         seznam.setId_seznama(u.getId_seznama());
         em.merge(seznam);
+
     }
 
     @Transactional

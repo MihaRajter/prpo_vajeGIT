@@ -23,10 +23,6 @@ public class ArtikelZrno {
     private String ime;
     private int st_nakupov;
 
-    public ArtikelZrno{
-
-    }
-
     public String getIme() {
         return ime;
     }
@@ -35,7 +31,7 @@ public class ArtikelZrno {
         this.ime = ime;
     }
 
-    public String st_nakupov() {
+    public int st_nakupov() {
         return st_nakupov;
     }
 
@@ -59,7 +55,7 @@ public class ArtikelZrno {
         this.ime = ime;
         this.st_nakupov = nakupi;
     }
-
+/*
     public List<Artikel> pridobiArtikleCriteriaAPI(){
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<Artikel> query = criteriaBuilder.createQuery(Artikel.class);
@@ -67,7 +63,7 @@ public class ArtikelZrno {
         query.select(from);
         return em.createNamedQuery(query).getResultList();
     }
-
+*/
     @PersistenceContext(unitName = "nakupovalni-seznami-jpa")
     private EntityManager em;
 
@@ -92,11 +88,12 @@ public class ArtikelZrno {
     }
 
     @Transactional
-    public Artikel posodobiArtikel(int artikelID, Artikel artikel){
+    public void posodobiArtikel(int artikelID, Artikel artikel){
         Artikel u = em.find(Artikel.class, artikelID);
         artikel.setArtikel_id(u.getArtikel_id());
         em.merge(artikel);
-    }
+
+   }
 
     @Transactional
     public Integer odstraniArtikel(int artikelID){

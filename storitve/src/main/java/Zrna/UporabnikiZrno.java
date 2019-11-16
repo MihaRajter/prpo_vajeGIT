@@ -25,10 +25,6 @@ public class UporabnikiZrno implements Serializable {
     private String ime;
     private String priimek;
 
-    public UporabnikiZrno{
-
-    }
-
     public String getIme() {
         return ime;
     }
@@ -61,7 +57,7 @@ public class UporabnikiZrno implements Serializable {
         this.ime = ime;
         this.priimek = priimek;
     }
-
+/*
     public List<Uporabnik> pridobiUporabnikeCriteriaAPI(){
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<Uporabnik> query = criteriaBuilder.createQuery(Uporabnik.class);
@@ -69,7 +65,7 @@ public class UporabnikiZrno implements Serializable {
         query.select(from);
         return em.createNamedQuery(query).getResultList();
     }
-
+*/
 @PersistenceContext(unitName = "nakupovalni-seznami-jpa")
     private EntityManager em;
 
@@ -82,7 +78,7 @@ public class UporabnikiZrno implements Serializable {
 
     public Uporabnik pridobiUporabnika(int uporabnikID){
         Uporabnik uporabnik = em.find(Uporabnik.class, uporabnikID);
-        return Uporabnik;
+        return uporabnik;
     }
 
     @Transactional
@@ -94,10 +90,11 @@ public class UporabnikiZrno implements Serializable {
     }
 
     @Transactional
-    public Uporabnik posodobiUporabnika(int UporabnikID, Uporabnik uporabnik){
+    public void posodobiUporabnika(int UporabnikID, Uporabnik uporabnik){
         Uporabnik u = em.find(Uporabnik.class, UporabnikID);
         uporabnik.setId(u.getId());
         em.merge(uporabnik);
+
     }
 
     @Transactional
