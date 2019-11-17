@@ -20,6 +20,15 @@ public class Uporabnik {
 
     //getter setter ---------------------------
 
+    public Uporabnik(){
+
+    }
+
+    public Uporabnik(String name, String priimek){
+        this.ime = name;
+        this.priimek = priimek;
+    }
+
     public Integer getId() {
         return Uporabnik_id;
     }

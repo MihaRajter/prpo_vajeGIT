@@ -59,7 +59,6 @@ public class SeznamZrno {
         Seznam u = em.find(Seznam.class, id_seznama);
         seznam.setId_seznama(u.getId_seznama());
         em.merge(seznam);
-
     }
 
     public Seznam pridobiSeznam(int seznamID){

@@ -7,6 +7,7 @@ import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -61,10 +62,11 @@ public class UporabnikiZrno{
         Uporabnik uporabnik = em.find(Uporabnik.class, uporabnikID);
         return uporabnik;
     }
-
     public Uporabnik dodajUporabnika(Uporabnik uporabnik){
         if(uporabnik != null){
-             em.persist(uporabnik);
+            em.getTransaction().begin();
+            em.persist(uporabnik);
+            em.getTransaction().commit();
         }
         return uporabnik;
     }
