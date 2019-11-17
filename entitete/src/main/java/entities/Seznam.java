@@ -16,8 +16,27 @@ public class Seznam {
     private Integer id_seznama;
     // getter in setter metode
 
+    @Column(name = "naziv")
+    private String naziv;
+
+    public Seznam(){
+
+    }
+
+    public Seznam(String naziv){
+        this.naziv = naziv;
+    }
+
     //------------------ getter setter
 
+
+    public String getNaziv() {
+        return naziv;
+    }
+
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
+    }
 
     public Integer getId_seznama() {
         return id_seznama;

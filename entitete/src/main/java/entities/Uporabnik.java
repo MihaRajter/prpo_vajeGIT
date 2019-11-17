@@ -18,6 +18,8 @@ public class Uporabnik {
     @Column(name = "priimek")
     private String priimek;
 
+
+
     //getter setter ---------------------------
 
     public Uporabnik(){

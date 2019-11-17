@@ -1,9 +1,10 @@
 package servlet;
 
-import Zrna.ArtikelZrno;
-import Zrna.SeznamZrno;
-import Zrna.UporabnikiZrno;
+import Uprava.UporabnikiseznamDto;
+import Zrna.*;
+import entities.Seznam;
 import entities.Uporabnik;
+import entities.Uporabnikseznam;
 
 
 import javax.inject.Inject;
@@ -24,6 +25,10 @@ public class JPAServlet extends HttpServlet {
     private SeznamZrno seznamZrno;
     @Inject
     private UporabnikiZrno uporabnikiZrno;
+    @Inject
+    private UpravljanjeNakupovalnihSeznamovZrno upravljanjeNakupovalnihSeznamovZrno;
+    @Inject
+    private UporabnikseznamZrno uporabnikseznamZrno;
 
 
     @Override
@@ -42,16 +47,36 @@ public class JPAServlet extends HttpServlet {
         for(Uporabnik u: list){
             resp.getWriter().println(u.getId() +", "+u.getIme() +" "+ u.getPriimek() + "<br>");
         }
-        Uporabnik s = new Uporabnik("cene","novak");
-        uporabnikiZrno.dodajUporabnika(s);
+        Uporabnik g = new Uporabnik("cene","novak");
+        uporabnikiZrno.dodajUporabnika(g);
 
-        resp.getWriter().println("<hr>");
+
+
 
         List<Uporabnik> list1 = uporabnikiZrno.getUporabniki();
         for(Uporabnik u: list1){
             resp.getWriter().println(u.getId() +", "+u.getIme() +" "+ u.getPriimek() + "<br>");
         }
         // izpis uporabnikov na spletno stran
+
+        Seznam s = new Seznam("seznam1");
+        s.setId_seznama(8231);
+
+        seznamZrno.dodajSeznam(s);
+
+        UporabnikiseznamDto unsz = new UporabnikiseznamDto(false,g,s);
+
+        upravljanjeNakupovalnihSeznamovZrno.dodajUporabnikSeznamu(unsz);
+        resp.getWriter().println("<hr>");
+        for(Uporabnik u: list1){
+            resp.getWriter().println(u.getId() +", "+u.getIme() +" "+ u.getPriimek() + "<br>");
+        }
+        resp.getWriter().println("<hr> tuka so seznami");
+        List<Uporabnikseznam> sezlist = uporabnikseznamZrno.getUps();
+        for(Uporabnikseznam u: sezlist){
+            resp.getWriter().println(u.getId_ups() +", "+u.isOdkljukan()+", "+ u.getUporabnik().getIme()+  "<br>");
+        }
+
 
     }
 }

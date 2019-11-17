@@ -1,30 +1,22 @@
-package entities;
+package Uprava;
 
-import javax.persistence.*;
+import entities.Seznam;
+import entities.Uporabnik;
 
-@Entity(name = "uporabnikseznam")
-@NamedQueries(value =
-        {
-                @NamedQuery(name = "entities.Uporabnikseznam.getAll", query = "SELECT o FROM uporabnikseznam o")
-        })
-public class Uporabnikseznam {
+public class UporabnikiseznamDto {
 
     private boolean odkljukan;
-
-    @Id
-    @GeneratedValue( strategy= GenerationType.AUTO )
     private Integer id_ups;
-
-    @ManyToOne
-    @JoinColumn(name = "Uporabnik_id")
     private Uporabnik uporabnik;
-    @ManyToOne
-    @JoinColumn(name = "id_seznama")
     private Seznam seznam;
 
-    public Uporabnikseznam(){}
-
-    //getter setter -.-----------
+    public UporabnikiseznamDto(){
+     }
+    public UporabnikiseznamDto(boolean odkljukan,Uporabnik u,Seznam s){
+        this.odkljukan = odkljukan;
+        this.uporabnik = u;
+        this.seznam = s;
+    }
 
     public boolean isOdkljukan() {
         return odkljukan;

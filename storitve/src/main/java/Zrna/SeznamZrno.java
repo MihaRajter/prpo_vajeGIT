@@ -18,12 +18,22 @@ public class SeznamZrno {
 
     private Integer id_seznama;
 
+    private String naziv;
+
     public int getId_seznama() {
         return id_seznama;
     }
 
     public void setId_seznama(int id_seznama) {
         this.id_seznama = id_seznama;
+    }
+
+    public String getNaziv() {
+        return naziv;
+    }
+
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
     }
 
     @PostConstruct

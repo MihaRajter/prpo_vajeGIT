@@ -1,36 +1,15 @@
-package entities;
+package Uprava;
 
-import javax.persistence.*;
+import entities.Artikel;
+import entities.Seznam;
 
-@Entity(name = "seznamartikel")
-@NamedQueries(value =
-        {
-                @NamedQuery(name = "entities.Seznamartikel.getAll", query = "SELECT o FROM seznamartikel o")
-        })
-public class Seznamartikel {
+public class SeznamartikelDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_sza;
-
-    @Column(name = "read")
     private boolean read;
-
-    @Column(name = "write")
     private boolean write;
-
-    @ManyToOne
-    @JoinColumn(name = "artikel_id")
     private Artikel artikel;
-    @ManyToOne
-    @JoinColumn(name = "id_seznama")
     private Seznam seznam;
-
-
-    public Seznamartikel(){}
-
-    // getter in setter metode -------------------
-
 
     public Integer getId_sza() {
         return id_sza;
