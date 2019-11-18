@@ -48,7 +48,7 @@ public class UpravljanjeNakupovalnihSeznamovZrno {
         seznamZrno.dodajSeznam(novSez);
 
         Uporabnikseznam novUps = new Uporabnikseznam();
-        novUps.setOdkljukan(false);
+        novUps.setOdkljukan(use.isOdkljukan());
         novUps.setSeznam(novSez);
         //novUps.setUporabnik(uporabnik);
 
@@ -74,7 +74,7 @@ public class UpravljanjeNakupovalnihSeznamovZrno {
         uporabnikiZrno.dodajUporabnika(novUpr);
 
         Uporabnikseznam novUps = new Uporabnikseznam();
-        novUps.setOdkljukan(false);
+        novUps.setOdkljukan(use.isOdkljukan());
         novUps.setUporabnik(novUpr);
         //novUps.setSeznam(seznam);
 
@@ -100,8 +100,8 @@ public class UpravljanjeNakupovalnihSeznamovZrno {
         artikelZrno.dodajArtikel(novArt);
 
         Seznamartikel novSza = new Seznamartikel();
-        novSza.setRead(false);
-        novSza.setWrite(false);
+        novSza.setRead(sza.isRead());
+        novSza.setWrite(sza.isWrite());
         novSza.setArtikel(novArt);
         //novSza.setSeznam(seznam);
 
@@ -126,8 +126,8 @@ public class UpravljanjeNakupovalnihSeznamovZrno {
         seznamZrno.dodajSeznam(novSez);
 
         Seznamartikel novSza = new Seznamartikel();
-        novSza.setRead(false);
-        novSza.setWrite(false);
+        novSza.setRead(sza.isRead());
+        novSza.setWrite(sza.isWrite());
         novSza.setArtikel(artikel);
         //novSza.setSeznam(novSez);
 

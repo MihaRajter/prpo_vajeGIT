@@ -1,6 +1,8 @@
 package entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "uporabnik")
 @NamedQueries(value =
@@ -18,7 +20,8 @@ public class Uporabnik {
     @Column(name = "priimek")
     private String priimek;
 
-
+    @OneToMany(mappedBy="uporabnik")
+    private List<Uporabnikseznam> uporabnikseznamList = new ArrayList<>();
 
     //getter setter ---------------------------
 

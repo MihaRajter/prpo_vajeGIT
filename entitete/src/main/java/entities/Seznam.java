@@ -1,6 +1,8 @@
 package entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "seznam")
 @NamedQueries(value =
@@ -18,6 +20,12 @@ public class Seznam {
 
     @Column(name = "naziv")
     private String naziv;
+
+    @OneToMany(mappedBy="seznam")
+    private List<Seznamartikel> seznamartikelList = new ArrayList<>();
+
+    @OneToMany(mappedBy="seznam")
+    private List<Uporabnikseznam> uporabnikseznamList = new ArrayList<>();
 
     public Seznam(){
 

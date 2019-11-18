@@ -19,7 +19,7 @@ public class Uporabnikseznam {
     @JoinColumn(name = "Uporabnik_id")
     private Uporabnik uporabnik;
     @ManyToOne
-    @JoinColumn(name = "id_seznama")
+    @JoinColumn(name = "id_seznama2")
     private Seznam seznam;
 
     public Uporabnikseznam(){}

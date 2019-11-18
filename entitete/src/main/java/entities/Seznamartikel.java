@@ -23,7 +23,7 @@ public class Seznamartikel {
     @JoinColumn(name = "artikel_id")
     private Artikel artikel;
     @ManyToOne
-    @JoinColumn(name = "id_seznama")
+    @JoinColumn(name = "id_seznama1")
     private Seznam seznam;
 
 
