@@ -2,6 +2,7 @@ package Uprava;
 
 import entities.Seznam;
 import entities.Uporabnik;
+import entities.Uporabnikseznam;
 
 public class DeloUporabnikDto {
 
@@ -20,6 +21,16 @@ public class DeloUporabnikDto {
     String uporabnik_ime;
 
     String uporabnik_priimek;
+
+    public DeloUporabnikDto(boolean use_odkljukan,Uporabnik u, Seznam s)
+    {
+        this.uporabnik=u;
+        this.seznam=s;
+        this.seznam_naziv=s.getNaziv();
+        this.uporabnik_ime=u.getIme();
+        this.uporabnik_priimek=u.getPriimek();
+        this.use_odkljukan=use_odkljukan;
+    }
 
     public Uporabnik getUporabnik() {
         return uporabnik;

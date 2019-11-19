@@ -1,5 +1,6 @@
 package Zrna;
 
+import Uprava.DeloUporabnikDto;
 import Uprava.NakupovalniSeznamDto;
 import Uprava.SeznamartikelDto;
 import Uprava.UporabnikiseznamDto;
@@ -37,45 +38,35 @@ public class UpravljanjeNakupovalnihSeznamovZrno {
         log.info("Deinicializacija Zrna "+UporabnikiZrno.class.getSimpleName());
     }
 
-    public Uporabnikseznam dodajSeznamUporabniku(UporabnikiseznamDto use){
+    public Uporabnikseznam dodajUporabnikuSeznam(DeloUporabnikDto use){
 
         //ena
-        Uporabnik uporabnik = uporabnikiZrno.pridobiUporabnika(use.getUporabnik().getId());
+        Uporabnik uporabnik=use.getUporabnik();
 
-        Seznam novSez = new Seznam();
-        novSez.setNaziv("seznam2");
+        Seznam seznam=seznamZrno.pridobiSeznam(use.getSeznam().getId_seznama());
 
-        seznamZrno.dodajSeznam(novSez);
 
         Uporabnikseznam novUps = new Uporabnikseznam();
-        novUps.setOdkljukan(use.isOdkljukan());
-        novUps.setSeznam(novSez);
-        //novUps.setUporabnik(uporabnik);
+        uporabnikiZrno.dodajUporabnika(uporabnik);
+
+        novUps.setOdkljukan(use.getUse_odkljukan());
+        novUps.setUporabnik(uporabnik);
+        //novUps.setSeznam(seznam);
 
         return uporabnikseznamZrno.dodajUps(novUps);
     }
 
-    public Uporabnikseznam dodajUporabnikSeznamu(UporabnikiseznamDto use){
+    public Uporabnikseznam dodajSeznamUporabniku(DeloUporabnikDto use){
 
         //ena
-        if(use.getSeznam()== null){
-            System.out.println("ne obstaja");
-            return null;
-        }
-        else{
-            System.out.println("obstaja");
-        }
-        Seznam seznam = seznamZrno.pridobiSeznam(use.getSeznam().getId_seznama());
-
-        Uporabnik novUpr = new Uporabnik();
-        novUpr.setIme("crtomir");
-        novUpr.setPriimek("kek");
-
-        uporabnikiZrno.dodajUporabnika(novUpr);
+        Uporabnik uporabnik=uporabnikiZrno.pridobiUporabnika(use.getUporabnik().getId());
+        Seznam seznam=use.getSeznam();
 
         Uporabnikseznam novUps = new Uporabnikseznam();
-        novUps.setOdkljukan(use.isOdkljukan());
-        novUps.setUporabnik(novUpr);
+        seznamZrno.dodajSeznam(seznam);
+
+        novUps.setOdkljukan(use.getUse_odkljukan());
+        novUps.setUporabnik(uporabnik);
         //novUps.setSeznam(seznam);
 
         return uporabnikseznamZrno.dodajUps(novUps);
@@ -91,19 +82,19 @@ public class UpravljanjeNakupovalnihSeznamovZrno {
         else{
             System.out.println("obstaja");
         }
-        Seznam seznam = seznamZrno.pridobiSeznam(sza.getSeznam().getId_seznama());
+        Seznam seznam = seznamZrno.pridobiSeznam((sza.getSeznam().getId_seznama()));
+        Artikel artikel=new Artikel();
+        artikel.setIme(sza.getArtikel().getIme());
+        artikel.setArtikel_id(sza.getArtikel().getArtikel_id());
+        artikel.setSt_nakupov(sza.getArtikel().getSt_nakupov());
 
-        Artikel novArt = new Artikel();
-        novArt.setIme("crtomir");
-        novArt.setSt_nakupov(0);
-
-        artikelZrno.dodajArtikel(novArt);
+        artikelZrno.dodajArtikel(artikel);
 
         Seznamartikel novSza = new Seznamartikel();
         novSza.setRead(sza.isRead());
         novSza.setWrite(sza.isWrite());
-        novSza.setArtikel(novArt);
-        //novSza.setSeznam(seznam);
+        novSza.setArtikel(artikel);
+        novSza.setSeznam(seznam);
 
         return seznamartikelZrno.dodajSza(novSza);
     }
@@ -118,20 +109,16 @@ public class UpravljanjeNakupovalnihSeznamovZrno {
         else{
             System.out.println("obstaja");
         }
+        Seznam seznam = sza.getSeznam();
         Artikel artikel = artikelZrno.pridobiArtikel((sza.getArtikel().getArtikel_id()));
 
-        Seznam novSez = new Seznam();
-        novSez.setNaziv("seznam2");
-
-        seznamZrno.dodajSeznam(novSez);
+        seznamZrno.dodajSeznam(seznam);
 
         Seznamartikel novSza = new Seznamartikel();
         novSza.setRead(sza.isRead());
         novSza.setWrite(sza.isWrite());
         novSza.setArtikel(artikel);
-        //novSza.setSeznam(novSez);
-
-
+        //novSza.setSeznam(seznam);
 
         return seznamartikelZrno.dodajSza(novSza);
     }

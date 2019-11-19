@@ -2,6 +2,7 @@ package Uprava;
 
 import entities.Artikel;
 import entities.Seznam;
+import entities.Uporabnik;
 
 public class DeloArtikelDto {
 
@@ -20,6 +21,16 @@ public class DeloArtikelDto {
     Artikel artikel;
 
     String seznam_naziv;
+
+    public DeloArtikelDto(boolean sza_read, boolean sza_write, Artikel a, Seznam s)
+    {
+        this.artikel=a;
+        this.seznam=s;
+        this.seznam_naziv=s.getNaziv();
+        this.sza_read=sza_read;
+        this.sza_write=sza_write;
+        this.artikel_steviloNaKupov=a.getSt_nakupov();
+    }
 
     public Seznam getSeznam() {
         return seznam;

@@ -20,7 +20,7 @@ public class Uporabnik {
     @Column(name = "priimek")
     private String priimek;
 
-    @OneToMany(mappedBy="uporabnik")
+    @OneToMany(mappedBy="uporabnik",cascade = CascadeType.PERSIST)
     private List<Uporabnikseznam> uporabnikseznamList = new ArrayList<>();
 
     //getter setter ---------------------------

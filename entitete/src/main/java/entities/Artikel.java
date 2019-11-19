@@ -23,8 +23,13 @@ public class Artikel {
     @Column(name = "st_nakupov")
     private Integer st_nakupov;
 
-    @OneToMany(mappedBy="artikel")
+    @OneToMany(mappedBy="artikel",cascade = CascadeType.PERSIST)
     private List<Seznamartikel> seznamartikelList = new ArrayList<>();
+
+    public Artikel()
+    {
+
+    }
 
     //---------------------------------  getter in setter metode
 

@@ -21,10 +21,10 @@ public class Seznam {
     @Column(name = "naziv")
     private String naziv;
 
-    @OneToMany(mappedBy="seznam")
+    @OneToMany(mappedBy="seznam",cascade = CascadeType.PERSIST)
     private List<Seznamartikel> seznamartikelList = new ArrayList<>();
 
-    @OneToMany(mappedBy="seznam")
+    @OneToMany(mappedBy="seznam",cascade = CascadeType.PERSIST)
     private List<Uporabnikseznam> uporabnikseznamList = new ArrayList<>();
 
     public Seznam(){
