@@ -20,6 +20,7 @@ public class Uporabnik {
     @Column(name = "priimek")
     private String priimek;
 
+    @JsonbTransient
     @OneToMany(mappedBy="uporabnik",cascade = CascadeType.PERSIST)
     private List<Uporabnikseznam> uporabnikseznamList = new ArrayList<>();
 

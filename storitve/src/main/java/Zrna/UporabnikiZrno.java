@@ -71,10 +71,12 @@ public class UporabnikiZrno{
         return uporabnik;
     }
 
-    public void posodobiUporabnika(int UporabnikID, Uporabnik uporabnik){
+    public Uporabnik posodobiUporabnika(int UporabnikID, Uporabnik uporabnik){
         Uporabnik u = em.find(Uporabnik.class, UporabnikID);
         uporabnik.setId(u.getId());
         em.merge(uporabnik);
+
+        return u;
 
     }
 

@@ -23,6 +23,7 @@ public class Artikel {
     @Column(name = "st_nakupov")
     private Integer st_nakupov;
 
+    @JsonbTransient
     @OneToMany(mappedBy="artikel",cascade = CascadeType.PERSIST)
     private List<Seznamartikel> seznamartikelList = new ArrayList<>();
 

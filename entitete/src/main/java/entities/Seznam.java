@@ -21,9 +21,11 @@ public class Seznam {
     @Column(name = "naziv")
     private String naziv;
 
+    @JsonbTransient
     @OneToMany(mappedBy="seznam",cascade = CascadeType.PERSIST)
     private List<Seznamartikel> seznamartikelList = new ArrayList<>();
 
+    @JsonbTransient
     @OneToMany(mappedBy="seznam",cascade = CascadeType.PERSIST)
     private List<Uporabnikseznam> uporabnikseznamList = new ArrayList<>();
 
