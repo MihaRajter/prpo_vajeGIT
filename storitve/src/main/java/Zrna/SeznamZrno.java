@@ -65,10 +65,11 @@ public class SeznamZrno {
         return seznam;
     }
 
-    public void posodobiSeznam(int id_seznama, Seznam seznam){
+    public Seznam posodobiSeznam(int id_seznama, Seznam seznam){
         Seznam u = em.find(Seznam.class, id_seznama);
         seznam.setId_seznama(u.getId_seznama());
         em.merge(seznam);
+        return u;
     }
 
     public Seznam pridobiSeznam(int seznamID){
