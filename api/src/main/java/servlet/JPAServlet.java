@@ -45,7 +45,7 @@ public class JPAServlet extends HttpServlet {
         writer.append("<br>Uporabniki:<br>");
    */     System.out.println("lole");
         //uporabnikiZrno.getUporabniki().stream().forEach(u -> writer.append(u.toString() + "<br> <br>"));
-
+/*
         resp.getWriter().println("Uporabniki: ");
         List<Uporabnik> list = uporabnikiZrno.getUporabniki();
         for(Uporabnik u: list){
@@ -85,7 +85,7 @@ public class JPAServlet extends HttpServlet {
             resp.getWriter().println(u.getId_ups() +", "+u.isOdkljukan()+", "+ u.getUporabnik().getIme()+  "<br>");
         }
 
-
+*/
         // izpis uporabnikov na spletno stran
 /*
         Seznam s = new Seznam("seznam1");

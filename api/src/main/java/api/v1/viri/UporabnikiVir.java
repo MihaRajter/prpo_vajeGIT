@@ -1,6 +1,7 @@
 package api.v1.viri;
 
 import Zrna.UporabnikiZrno;
+import anotacije.BeleziKlice;
 import entities.Uporabnik;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -10,9 +11,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @ApplicationScoped
-@Path("uporabniki")
+@Path("uporabnik")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@BeleziKlice
+
 public class UporabnikiVir {
 
     @Inject
@@ -24,8 +27,8 @@ public class UporabnikiVir {
     }
 
     @GET
-    @Path("{id}")
-    public Response pridobiUporanika(@PathParam("id") int id){
+    @Path("{Uporabnik_id}")
+    public Response pridobiUporabnika(@PathParam("Uporabnik_id") int id){
         Uporabnik uporabnik = uporabnikiZrno.pridobiUporabnika(id);
 
         if(uporabnik != null){
@@ -47,16 +50,16 @@ public class UporabnikiVir {
     }
 
     @PUT
-    @Path("{id}")
-    public Response posodobiUporabnika(@PathParam("id") int id, Uporabnik uporabnik){
+    @Path("{Uporabnik_id}")
+    public Response posodobiUporabnika(@PathParam("Uporabnik_id") int id, Uporabnik uporabnik){
         return Response
                 .status(Response.Status.CREATED)
                 .entity(uporabnikiZrno.posodobiUporabnika(id,uporabnik))
                 .build();
     }
     @DELETE
-    @Path("{id}")
-    public Response odstraniUporabnika(@PathParam("id") int id){
+    @Path("{Uporabnik_id}")
+    public Response odstraniUporabnika(@PathParam("Uporabnik_id") int id){
         return Response
                 .status(Response.Status.OK)
                 .entity(uporabnikiZrno.odstraniUporabnika(id))
