@@ -2,13 +2,16 @@ package api.v1.viri;
 
 import Zrna.UporabnikiZrno;
 import anotacije.BeleziKlice;
+import com.kumuluz.ee.rest.beans.QueryParameters;
 import entities.Uporabnik;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 @ApplicationScoped
 @Path("uporabnik")
@@ -18,12 +21,22 @@ import javax.ws.rs.core.Response;
 
 public class UporabnikiVir {
 
+    @Context
+    protected UriInfo uriInfo;
+
     @Inject
     private UporabnikiZrno uporabnikiZrno;
 
     @GET
     public Response pridobiUporabnike(){
-        return Response.ok(uporabnikiZrno.getUporabniki()).build();
+        //return Response.ok(uporabnikiZrno.getUporabniki()).build();
+        QueryParameters query = QueryParameters.query(uriInfo.getRequestUri().getQuery()).build();
+        Long stUporabnikov = uporabnikiZrno.getUporabnikiCount(query);
+
+        return Response
+                .ok(uporabnikiZrno.getUporabniki(query))
+                .header("stevilo-uporabnikov",stUporabnikov)
+                .build();
     }
 
     @GET

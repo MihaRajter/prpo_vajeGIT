@@ -23,6 +23,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kumuluzee.version>3.5.0</kumuluzee.version>
         <postgresql.version>42.2.8</postgresql.version>
+        <kumuluzee-rest.version>1.2.3</kumuluzee-rest.version>
+        <kumuluzee-openapi.version>1.0.0</kumuluzee-openapi.version>
     </properties>
 
 <dependencyManagement>
@@ -57,6 +59,18 @@
             <groupId>si.fri.prpo3</groupId>
             <artifactId>entitete</artifactId>
             <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.kumuluz.ee.rest</groupId>
+            <artifactId>kumuluzee-rest-core</artifactId>
+            <version>${kumuluzee-rest.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.kumuluz.ee.openapi</groupId>
+            <artifactId>kumuluzee-openapi</artifactId>
+            <version>${kumuluzee-openapi.version}</version>
         </dependency>
     </dependencies>
 </dependencyManagement>

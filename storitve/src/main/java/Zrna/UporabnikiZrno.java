@@ -1,5 +1,7 @@
 package Zrna;
 
+import com.kumuluz.ee.rest.beans.QueryParameters;
+import com.kumuluz.ee.rest.utils.JPAUtils;
 import entities.Uporabnik;
 
 import javax.annotation.PostConstruct;
@@ -8,6 +10,8 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.UriInfo;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -51,11 +55,23 @@ public class UporabnikiZrno{
 @PersistenceContext(unitName = "nakupovalni-seznami-jpa")
     private EntityManager em;
 
-    public List<Uporabnik> getUporabniki() {
+
+    //??
+    @Context
+    protected UriInfo uriInfo;
+
+
+//--
+
+
+    public List<Uporabnik> getUporabniki(QueryParameters query) {
 
         // implementacija
-        return (List<Uporabnik>) em.createNamedQuery("entities.Uporabnik.getAll").getResultList();
-
+        //return (List<Uporabnik>) em.createNamedQuery("entities.Uporabnik.getAll").getResultList();
+        return JPAUtils.queryEntities(em,Uporabnik.class,query);
+    }
+    public Long getUporabnikiCount(QueryParameters query){
+        return JPAUtils.queryEntitiesCount(em,Uporabnik.class,query);
     }
 
     public Uporabnik pridobiUporabnika(int uporabnikID){
