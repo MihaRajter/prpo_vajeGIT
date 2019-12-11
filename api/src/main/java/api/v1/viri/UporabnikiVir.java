@@ -4,6 +4,16 @@ import Zrna.UporabnikiZrno;
 import anotacije.BeleziKlice;
 import com.kumuluz.ee.rest.beans.QueryParameters;
 import entities.Uporabnik;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.headers.Header;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import org.eclipse.jetty.http2.api.Session;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -27,6 +37,15 @@ public class UporabnikiVir {
     @Inject
     private UporabnikiZrno uporabnikiZrno;
 
+
+
+    @Operation(description = "Returns list of users.", summary = "Users list", tags = "users", responses = {
+            @ApiResponse(responseCode = "200",
+                    description = "List of users",
+                    content = @Content(
+                            array = @ArraySchema(schema = @Schema(implementation = Uporabnik.class))),
+                    headers = {@Header(name = "stevilo-uporabnikov", schema = @Schema(type = "long"))}
+            )})
     @GET
     public Response pridobiUporabnike(){
         //return Response.ok(uporabnikiZrno.getUporabniki()).build();
@@ -39,9 +58,17 @@ public class UporabnikiVir {
                 .build();
     }
 
+    @Operation(description = "Returns details of user.", summary = "user details", tags = "users", responses = {
+            @ApiResponse(responseCode = "200",
+                    description = "details of user",
+                    content = @Content(
+                            schema = @Schema(implementation = Uporabnik.class))
+            )})
     @GET
     @Path("{Uporabnik_id}")
-    public Response pridobiUporabnika(@PathParam("Uporabnik_id") int id){
+    public Response pridobiUporabnika(@Parameter(
+            description = "identifikator uporabnika za branje",
+            required = true) @PathParam("Uporabnik_id") Integer id) {
         Uporabnik uporabnik = uporabnikiZrno.pridobiUporabnika(id);
 
         if(uporabnik != null){
@@ -52,27 +79,55 @@ public class UporabnikiVir {
         }
 
     }
-
+    @Operation(description = "dodaj Uporabnika.", summary = "user dodaj", tags = "users", responses = {
+            @ApiResponse(responseCode = "201",
+                    description = "uporabnik dodan"),
+            @ApiResponse(responseCode = "405", description = "napaka")})
     @POST
-    public Response dodajUporabnika(Uporabnik uporabnik){
+    public Response dodajUporabnika(@RequestBody(
+            description = "dodajanje uporabnikov",
+            required = true,
+            content = @Content(
+                    schema = @Schema(implementation = Uporabnik.class)))
+            Uporabnik uporabnik){
 
         return Response
                 .status(Response.Status.CREATED)
                 .entity(uporabnikiZrno.dodajUporabnika(uporabnik))
                 .build();
     }
-
+    @Operation(description = "posodobi Uporabnika.", summary = "user posodobi", tags = "users", responses = {
+            @ApiResponse(responseCode = "200",
+                    description = "uporabnik dodan"),
+            })
     @PUT
     @Path("{Uporabnik_id}")
-    public Response posodobiUporabnika(@PathParam("Uporabnik_id") int id, Uporabnik uporabnik){
+    public Response posodobiUporabnika( @Parameter(description = "Id uporabnika za update",
+            required = true) @PathParam("Uporabnik_id") int id, @RequestBody(
+                    description="DTO objekt za posodabljanje", required = true,
+                    content = @Content(
+                            schema = @Schema(implementation = Uporabnik.class))) Uporabnik uporabnik){
         return Response
                 .status(Response.Status.CREATED)
                 .entity(uporabnikiZrno.posodobiUporabnika(id,uporabnik))
                 .build();
     }
+    @Operation(description = "Odstrani uporabnika" , summary = "Brisanje uporabnika",
+    tags = "users", responses = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "uspešno odstranjen uporabnik"
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "neuspešno, uporabnik ni najden"
+            )
+    })
+
     @DELETE
     @Path("{Uporabnik_id}")
-    public Response odstraniUporabnika(@PathParam("Uporabnik_id") int id){
+    public Response odstraniUporabnika(@Parameter(description = "id uporabnika za brisanje",
+    required = true)@PathParam("Uporabnik_id") int id){
         return Response
                 .status(Response.Status.OK)
                 .entity(uporabnikiZrno.odstraniUporabnika(id))

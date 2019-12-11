@@ -3,14 +3,17 @@ package api.v1.viri;
 import Zrna.SeznamZrno;
 import Zrna.UporabnikiZrno;
 import anotacije.BeleziKlice;
+import com.kumuluz.ee.rest.beans.QueryParameters;
 import entities.Seznam;
 import entities.Uporabnik;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 @ApplicationScoped
 @Path("seznam")
@@ -19,12 +22,22 @@ import javax.ws.rs.core.Response;
 @BeleziKlice
 public class SeznamVir {
 
+    @Context
+    protected UriInfo uriInfo;
+
     @Inject
     private SeznamZrno seznamZrno;
 
     @GET
-    public Response pridobiSezname(){
-        return Response.ok(seznamZrno.getSeznami()).build();
+    public Response pridobiUporabnike(){
+        //return Response.ok(uporabnikiZrno.getUporabniki()).build();
+        QueryParameters query = QueryParameters.query(uriInfo.getRequestUri().getQuery()).build();
+        Long stSeznamov = seznamZrno.getSeznamiCount(query);
+
+        return Response
+                .ok(seznamZrno.getSeznami(query))
+                .header("stevilo-uporabnikov",stSeznamov)
+                .build();
     }
 
     @GET

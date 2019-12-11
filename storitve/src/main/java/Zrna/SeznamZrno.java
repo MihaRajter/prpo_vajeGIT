@@ -1,12 +1,17 @@
 package Zrna;
 
+import com.kumuluz.ee.rest.beans.QueryParameters;
+import com.kumuluz.ee.rest.utils.JPAUtils;
 import entities.Seznam;
+import entities.Uporabnik;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.UriInfo;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -51,11 +56,19 @@ public class SeznamZrno {
     @PersistenceContext(unitName = "nakupovalni-seznami-jpa")
     private EntityManager em;
 
-    public List<Seznam> getSeznami() {
+
+    @Context
+    protected UriInfo uriInfo;
+
+    public List<Seznam> getSeznami(QueryParameters query) {
 
         // implementacija
-        return (List<Seznam>) em.createNamedQuery("entities.Seznam.getAll").getResultList();
+        //return (List<Seznam>) em.createNamedQuery("entities.Seznam.getAll").getResultList();
+        return JPAUtils.queryEntities(em, Seznam.class,query);
+    }
 
+    public Long getSeznamiCount(QueryParameters query){
+        return JPAUtils.queryEntitiesCount(em,Seznam.class,query);
     }
 
     public Seznam dodajSeznam(Seznam seznam){
@@ -64,6 +77,8 @@ public class SeznamZrno {
         }
         return seznam;
     }
+
+
 
     public Seznam posodobiSeznam(int id_seznama, Seznam seznam){
         Seznam u = em.find(Seznam.class, id_seznama);
