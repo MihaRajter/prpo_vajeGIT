@@ -14,14 +14,19 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.eclipse.jetty.http2.api.Session;
+import org.eclipse.microprofile.rest.client.RestClientBuilder;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import java.net.URL;
 
 @ApplicationScoped
 @Path("uporabnik")
@@ -36,6 +41,15 @@ public class UporabnikiVir {
 
     @Inject
     private UporabnikiZrno uporabnikiZrno;
+
+    private Client httpClient;
+    String baseUrl="";
+
+    @PostConstruct
+    private void init() {
+        httpClient = ClientBuilder.newClient();
+        baseUrl = "http://localhost:8081/v1";
+    }
 
 
 
@@ -133,4 +147,6 @@ public class UporabnikiVir {
                 .entity(uporabnikiZrno.odstraniUporabnika(id))
                 .build();
     }
+
+
 }

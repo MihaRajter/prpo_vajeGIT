@@ -66,6 +66,11 @@
             <artifactId>kumuluzee-rest-core</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.kumuluz.ee.rest-client</groupId>
+            <artifactId>kumuluzee-rest-client</artifactId>
+        </dependency>
+
 
     </dependencies>
 </project>
