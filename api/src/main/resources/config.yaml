@@ -1,11 +1,13 @@
 kumuluzee:
   name: simple-jdbc-sample
   version: 1.0.0
+  baseUrl: http://localhost:8081/v1
   env:
     name: dev
+
   datasources:
       - jndi-name: jdbc/NakupovalniSeznamiDS
-        connection-url: jdbc:postgresql://192.168.202.128/nakupovanje
+        connection-url: jdbc:postgresql://192.168.202.130/nakupovanje
         username: postgres
         password: postgres
         max-pool-size: 20
