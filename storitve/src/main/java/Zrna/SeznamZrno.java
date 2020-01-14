@@ -10,16 +10,27 @@ import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.ws.rs.InternalServerErrorException;
+import javax.ws.rs.ProcessingException;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.client.Client;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Logger;
+
+
 
 @ApplicationScoped
 public class SeznamZrno {
 
 
     private Logger log = Logger.getLogger(SeznamZrno.class.getName());
+
+    private Client httpClient;
+
 
     private Integer id_seznama;
 
@@ -101,5 +112,21 @@ public class SeznamZrno {
     }
 
 
+    public Object getZanimivost() {
+        int number = ((int) Math.random())%100;
+        String url = "https://numbersapi.p.rapidapi.com/" + number + "/math";
 
+        try{
+
+
+            return httpClient
+                    .target(url)
+                    .request()
+                    .header("X-RapidAPI-Key", "ea91e01f3emsha873adf46c87ab8p10d4c8jsn311ba5b90034")
+                    .get(String.class);
+        } catch (WebApplicationException | ProcessingException e){
+            throw new InternalServerErrorException(e);
+        }
+
+    }
 }

@@ -1,0 +1,8 @@
+api-specs\v1\openapi-configuration.json
+api\v1\viri\SeznamVir.class
+api\v1\viri\UporabnikiVir.class
+api\v1\viri\Zanimivost.class
+servlet\JPAServlet.class
+servlet\JPAServlet$1.class
+META-INF\services\javax.ws.rs.core.Application
+api\v1\NakupovalniSeznamiApplication.class

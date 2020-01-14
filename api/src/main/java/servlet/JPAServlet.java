@@ -39,4 +39,7 @@ public class JPAServlet extends HttpServlet {
             .target("http://localhost:8081/v1")
             .request().get(new GenericType<String>() {
             });
+
+
+
 }
