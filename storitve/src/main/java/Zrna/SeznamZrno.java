@@ -114,7 +114,7 @@ public class SeznamZrno {
 
     public Object getZanimivost() {
         int number = ((int) Math.random())%100;
-        String url = "https://numbersapi.p.rapidapi.com/" + number + "/math";
+        String url = "https://numbersapi.p.rapidapi.com/6/21/date";
 
         try{
 

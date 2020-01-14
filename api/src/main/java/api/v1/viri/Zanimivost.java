@@ -1,5 +1,6 @@
 package api.v1.viri;
 
+
 import Zrna.SeznamZrno;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -18,7 +19,7 @@ import javax.ws.rs.core.Response;
 public class Zanimivost {
 
     @Inject
-    private Zrna.SeznamZrno SeznamZrno;
+    private SeznamZrno SeznamZrno;
 
     @GET
     public Response Zanimivost(){
