@@ -20,7 +20,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Logger;
-
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.core.GenericType;
 
 
 @ApplicationScoped
@@ -54,6 +56,8 @@ public class SeznamZrno {
 
     @PostConstruct
     private void init(){
+
+        httpClient = ClientBuilder.newClient();
         log.info("Inicializacija Zrna "+SeznamZrno.class.getSimpleName());
     }
 
@@ -113,8 +117,8 @@ public class SeznamZrno {
 
 
     public Object getZanimivost() {
-        int number = ((int) Math.random())%100;
-        String url = "https://numbersapi.p.rapidapi.com/6/21/date";
+        int number =(int) ( Math.random()*100);
+        String url = "https://numbersapi.p.rapidapi.com/"+1729+"/math";
 
         try{
 
